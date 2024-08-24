@@ -1,9 +1,18 @@
 import pandas as pd
 import altair as alt
 import plotly.express as px
+import os
 
+# Define base path relative to current file's location
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, '../assets/data')
+
+# Load the datasets using dynamic paths
 def load_data(data_path):
-    df = pd.read_csv(data_path, parse_dates=['Timestamp'])
+    full_path = os.path.join(DATA_DIR, data_path)
+    if not os.path.exists(full_path):
+        raise FileNotFoundError(f"The file at {full_path} does not exist.")
+    df = pd.read_csv(full_path, parse_dates=['Timestamp'])
     return df
 
 def get_summary_statistics(df):
