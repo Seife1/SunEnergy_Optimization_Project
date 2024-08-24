@@ -13,9 +13,12 @@ st.set_page_config(
 )
 
 # Load the datasets
-benin_df = load_data('../assets/data/benin-malanville.csv')
-sierraleone_df = load_data('../assets/data/sierraleone-bumbuna.csv')
-togo_df = load_data('../assets/data/togo-dapaong_qc.csv')
+try:
+    benin_df = load_data('benin-malanville.csv')
+    sierraleone_df = load_data('sierraleone-bumbuna.csv')
+    togo_df = load_data('togo-dapaong_qc.csv')
+except FileNotFoundError as e:
+    print(e)
 
 # Add a sidebar
 with st.sidebar:
